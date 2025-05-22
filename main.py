@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from auth import get_user_id_from_token
-from parser import parse_statement  # assume this is your function
+from parser import extract_transactions
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def parse():
         return jsonify({'error': error}), 401
 
     data = request.get_json()
-    result = parse_statement(data)
+    result = extract_transactions(data['pdf_path'])  
     result['user_id'] = user_id  # optional: attach user ID to the result
     return jsonify(result)
 
