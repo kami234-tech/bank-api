@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 from auth import get_user_id_from_token
 from parser import extract_transactions
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=["https://kami234-tech.github.io"])
 
 @app.route('/')
 def health():
